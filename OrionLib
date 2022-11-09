@@ -665,20 +665,19 @@ function OrionLib:MakeWindow(WindowConfig)
 	end)
 
 	AddConnection(UserInputService.InputBegan, function(Input)
-		if Input.KeyCode == Enum.KeyCode.RightShift and UIHidden then
-			MainWindow.Visible = true
-		end
-	end)
-	
-	AddConnection(UserInputService.InputBegan, function(Input)
-		if Input.KeyCode == Enum.KeyCode.RightShift and not UIHidden then
-			MainWindow.Visible = false
+		if Input.KeyCode == Enum.KeyCode.RightShift then
+			MainWindow.Visible = not MainWindow.Visible
+			wait(0.1)
+			if MainWindow.Visible == false then
 			OrionLib:MakeNotification({
 				Name = "Interface Hidden",
 				Content = "Tap RightShift to reopen the interface",
 				Time = 5
 			})
-			WindowConfig.CloseCallback()
+				WindowConfig.CloseCallback()
+			else
+				print('uwu')
+			end
 		end
 	end)
 
